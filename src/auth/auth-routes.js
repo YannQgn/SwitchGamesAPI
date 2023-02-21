@@ -1,5 +1,6 @@
 module.exports = app => {
     const auth = require('./auth-controller');
+    const game = require('./game-controller');
     const router = require('express').Router();
     const jwtMiddleware = require('./jwt-middleware');
 
@@ -7,7 +8,7 @@ module.exports = app => {
 
     router.post("/sign-in", auth.signIn);
 
-    router.post("/add-game", auth.addGame);
+    router.post("/add-game", game.addGame);
 
     router.get("/me", jwtMiddleware.checkJwtTokenMiddleware, auth.getCurrentUser)
 

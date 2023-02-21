@@ -105,48 +105,6 @@ exports.getCurrentUser = async (req, res) => {
     return res.json(userData);
 }
 
-exports.addGame = async (req, res) => {
-    // #swagger.tags = ['Auth']
-    // #swagger.description = 'Service to register new user into carsapi'
-    // #swagger.summary = 'Service to register new user'
-    const {
-        name, publisher, players, languages, categories, releaseDate, ageRating, compatibleControllers
-    } = req.body;
-
-    let gameExists = await gameAlreadyExists(name);
-    
-    if (userHasAlreadyAccount == true) {
-        return res.status(403).json({ "error": "User has already account" });
-    }
-
-    bcrypt.hash(password, saltRounds, function (err, hash) {
-        firestore.collection("users").add({
-            "email": email,
-            "password": hash,
-            "firstName": firstName,
-            "lastName": lastName,
-            "phoneNumber": phoneNumber,
-            "address": address
-        }).then(function (docRef) {
-            let messageToReturn = "User added successfully !";
-
-            firestore.collection("users").doc(docRef.id).update({
-                "uid": docRef.id
-            });
-
-            console.log(messageToReturn);
-
-            let jwtToken = createJwtToken(docRef.id, email, firstName, lastName);
-
-            return res.status(201).send({
-                "uid": docRef.id,
-                "accessToken": jwtToken,
-            });
-        }).catch(function (error) {
-            return res.status(500).send({ "error": "Something went wrong :(" });
-        });
-    });
-}
 
 const hasAlreadyAccount = async (email) => {
     let userSnapshot = await firestore.collection("users").where("email", "==", email);
