@@ -1,7 +1,7 @@
 {
-  "name": "carsapi",
+  "name": "switchgamesapi",
   "version": "1.0.0",
-  "description": "API for car's lover",
+  "description": "API for showing Switch Games",
   "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +9,7 @@
     "swagger-autogen": "node ./src/swagger.js"
   },
   "keywords": [],
-  "author": "Soumaila Abdoulaye DIARRA",
+  "author": "Yann QUEGUINER",
   "license": "ISC",
   "dependencies": {
     "@google-cloud/firestore": "^6.4.1",

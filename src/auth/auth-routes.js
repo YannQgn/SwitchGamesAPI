@@ -7,6 +7,8 @@ module.exports = app => {
 
     router.post("/sign-in", auth.signIn);
 
+    router.post("/add-game", auth.addGame);
+
     router.get("/me", jwtMiddleware.checkJwtTokenMiddleware, auth.getCurrentUser)
 
     // -- To declare the prefix path of your API service
