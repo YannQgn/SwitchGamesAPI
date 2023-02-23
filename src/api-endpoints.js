@@ -1,31 +1,32 @@
 module.exports = function (app) {
     // require("./users/users.routes")(app);
     require("./auth/auth-routes")(app);
-    
+    require('./games/game-routes')(app);
+
     app.get('/users/:id', (req, res) => {
-    // To describe API endpoint with swagger inside service, put sharp following by swagger parameter
-    // #swagger.tags = ['User']
-    // #swagger.description = 'API endpoint to get user by id'
-    // #swagger.parameters['id'] = { description: 'User id' }
+        // To describe API endpoint with swagger inside service, put sharp following by swagger parameter
+        // #swagger.tags = ['User']
+        // #swagger.description = 'API endpoint to get user by id'
+        // #swagger.parameters['id'] = { description: 'User id' }
 
         /* #swagger.parameters['filters'] = {
-	       in: 'query',
+           in: 'query',
                description: 'definition of filters',
                type: 'string'
         } */
-	    
-	const filters = req.query.filters;
 
-    if(false){
-        return res.status(404).send(false);
-    }
+        const filters = req.query.filters;
 
-    /* #swagger.responses[200] = { 
-               schema: { $ref: "#/definitions/User" },
-               description: 'Model of user response' 
-    } */
-    // return res.status(200).send(data);
-    return res.send({"welcome": "Hello, welcome to our node js and express API :)"});
+        if (false) {
+            return res.status(404).send(false);
+        }
+
+        /* #swagger.responses[200] = { 
+                   schema: { $ref: "#/definitions/User" },
+                   description: 'Model of user response' 
+        } */
+        // return res.status(200).send(data);
+        return res.send({ "welcome": "Hello, welcome to our node js and express API :)" });
 
     });
 
