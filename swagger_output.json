@@ -275,9 +275,6 @@
           "401": {
             "description": "Unauthorized"
           },
-          "403": {
-            "description": "Forbidden"
-          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -344,25 +341,24 @@
         "tags": [
           "Games"
         ],
-        "summary": "Service to get all games;",
+        "summary": "Service to get all games",
         "description": "Service to get all games",
         "parameters": [
           {
             "name": "authorization",
             "in": "header",
             "type": "string"
-          },
-          {
-            "name": "gameId",
-            "in": "path",
-            "description": "ID of game",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "401": {
             "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "security": [
@@ -377,7 +373,7 @@
         "tags": [
           "Games"
         ],
-        "summary": "Service to get a gamee",
+        "summary": "Service to get a game",
         "description": "Service to get a game",
         "parameters": [
           {
