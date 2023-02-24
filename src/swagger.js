@@ -20,17 +20,18 @@ const doc = {
     servers: [
         {
             // dev
-            url: "localhost:8080/switchgames/api/v1"
+            // url: "localhost:8080/switchgames/api/v1"
             // prod
-            // url: "switch-games-api.onrender.com/switchgames/api/v1"
+            url: "https://www.switch-games-api.onrender.com/switchgames/api/v1"
         }
     ],
     // dev
-    host: "localhost:8080/switchgames/api/v1",
-    basePath: "/",
+    // host: "localhost:8080/switchgames/api/v1",
+    // basePath: "/",
     // prod
-    // host: "switch-games-api.onrender.com",
-    // basePath: "/switchgames/api/v1",
+    host: "switch-games-api.onrender.com",
+    basePath: "/switchgames/api/v1",
+    schemes: ["http", "https"],
     consumes: ['application/json'],
     produces: ['application/json'],
     securityDefinitions: {
