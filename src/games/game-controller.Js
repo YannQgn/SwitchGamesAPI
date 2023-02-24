@@ -101,17 +101,15 @@ exports.getAGame = async (req, res) => {
       type: 'string'
     }
       */
-    console.log(req.body);
-    if (!req.params.gameId)
-        return res.status(401).send({ error: "Unauthorized." });
-
     const doc = await docExist("games", req.params.gameId);
-
-    if (!doc) {
-        return res.status(404).send({ error: "Game not found." });
+    try {
+        if (!doc) {
+            return res.status(404).send({ error: "Game not found." });
+        }
+        return res.status(200).send(doc.data());
+    } catch (error) {
+        return res.status(500).send({ Error: "Whaaat?" });
     }
-
-    return res.status(200).send(doc.data());
 };
 
 exports.deleteGame = async (req, res) => {
