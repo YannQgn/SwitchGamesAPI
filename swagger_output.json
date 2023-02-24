@@ -13,13 +13,13 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "localhost:8080/switchgames/api/v1",
+  "host": "switch-games-api.onrender.com",
   "servers": [
     {
-      "url": "localhost:8080/switchgames/api/v1"
+      "url": "https://www.switch-games-api.onrender.com/switchgames/api/v1"
     }
   ],
-  "basePath": "/",
+  "basePath": "/switchgames/api/v1",
   "tags": [
     {
       "name": "User",
@@ -27,7 +27,8 @@
     }
   ],
   "schemes": [
-    "http"
+    "http",
+    "https"
   ],
   "securityDefinitions": {
     "bearerAuth": {
