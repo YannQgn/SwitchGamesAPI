@@ -153,40 +153,30 @@ exports.updateGame = async (req, res) => {
         #swagger.security = [{
         "bearerAuth": []
     }]*/
-    const gameId = req.body.gameId;
-    const game = await docExist("games", gameId);
+    const data = req.body;
 
-    if (!game) return res.status(404).send({ message: "Game not found" });
+    connexionFunction = async (collection, uid) => {
+        const game = await firestore.collection(collection).doc(uid).get();
+        if (!game.exists) return false;
+        return game;
+    };
+
+    const game = connexionFunction("games", data.uid);
+    console.log(game);
+    if (!game) return res.status(404).send({ message: "Game not found." });
 
     const newGame = {
-        ...game.data(),
-        ...gameId,
+        ...game.data,
+        ...data,
     };
-    if (!(await isValid(updateGameSchema, newGame)))
-        return res.status(400).send({ error: "Invalid data." });
+
     try {
-        await firestore.collection("games").doc(gameId).update(gameId);
-        return res.status(200).send({ success: "Game updated successfully !" });
+        await firestore.collection("games").doc(data.uid).update(newGame);
+        return res.status(200).send({ success: "Game updated successfully" });
     } catch (error) {
         console.log(err);
         return res.status(500).send({ error: "Server error." });
     }
-};
-
-const updateGameSchema = {
-    type: "object",
-    properties: {
-        gameId: { type: "string", default: "1" },
-        gameName: { type: "string", default: "any" },
-        publisher: { type: "string", default: "any" },
-        players: { type: "string", default: "any" },
-        languages: { type: "string", default: "any" },
-        categories: { type: "string", default: "any" },
-        releaseDate: { type: "string", default: "any" },
-        ageRating: { type: "string", default: "any" },
-        compatibleControllers: { type: "string", default: "any" },
-    },
-    required: ["gameId"],
 };
 
 const docExist = async (collection, id) => {
