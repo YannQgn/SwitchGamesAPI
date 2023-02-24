@@ -367,41 +367,19 @@
     },
     "/get-a-game": {
       "get": {
-        "tags": [
-          "Games"
-        ],
-        "summary": "Service to get a game",
-        "description": "Service to get a game",
+        "description": "",
         "parameters": [
           {
             "name": "authorization",
             "in": "header",
             "type": "string"
-          },
-          {
-            "name": "gameId",
-            "in": "path",
-            "description": "ID of game",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "401": {
             "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
           }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/delete-game": {

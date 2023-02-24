@@ -87,32 +87,32 @@ exports.getAllGames = async (req, res) => {
     }
 };
 
-// exports.getAGame = async (req, res) => {
-//     /* #swagger.tags = ['Games']
-//        #swagger.description = 'Service to get a game';
-//        #swagger.summary = "Service to get a game";
-//            #swagger.security = [{
-//              "bearerAuth": []
-//        }]
-//        #swagger.parameters['gameId'] = {
-//       in: 'path',
-//       description: 'ID of game',
-//       required: true,
-//       type: 'string'
-//     }
-//       */
-//     console.log(req.body);
-//     if (!req.params.gameId)
-//         return res.status(401).send({ error: "Unauthorized." });
+exports.getAGame = async (req, res) => {
+    /* #swagger.tags = ['Games']
+       #swagger.description = 'Service to get a game';
+       #swagger.summary = "Service to get a game";
+           #swagger.security = [{
+             "bearerAuth": []
+       }]
+       #swagger.parameters['gameId'] = {
+      in: 'path',
+      description: 'ID of game',
+      required: true,
+      type: 'string'
+    }
+      */
+    console.log(req.body);
+    if (!req.params.gameId)
+        return res.status(401).send({ error: "Unauthorized." });
 
-//     const doc = await docExist("games", req.params.gameId);
+    const doc = await docExist("games", req.params.gameId);
 
-//     if (!doc) {
-//         return res.status(404).send({ error: "Game not found." });
-//     }
+    if (!doc) {
+        return res.status(404).send({ error: "Game not found." });
+    }
 
-//     return res.status(200).send(doc.data());
-// };
+    return res.status(200).send(doc.data());
+};
 
 exports.deleteGame = async (req, res) => {
     /* #swagger.tags = ['Games']
@@ -179,8 +179,8 @@ exports.updateGame = async (req, res) => {
     }
 };
 
-// const docExist = async (collection, id) => {
-//     const doc = await firestore.collection(collection).doc(id).get();
-//     if (!doc.exists) return false;
-//     return doc;
-// };
+const docExist = async (collection, id) => {
+    const doc = await firestore.collection(collection).doc(id).get();
+    if (!doc.exists) return false;
+    return doc;
+};
