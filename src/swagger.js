@@ -22,8 +22,12 @@ const doc = {
             url: "http://localhost:8080/switchgames/api/v1/"
         }
     ],
-    host: "localhost:8080/switchgames/api/v1",
-    basePath: "/",
+    // dev
+    // host: "localhost:8080/switchgames/api/v1",
+    // basePath: "/",
+    // prod
+    host: "switch-games-api.onrender.com",
+    basePath: "/switchgames/api/v1",
     consumes: ['application/json'],
     produces: ['application/json'],
     securityDefinitions: {

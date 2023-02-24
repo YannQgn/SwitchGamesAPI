@@ -2,10 +2,10 @@ const firestore = require("../config/firebase-config");
 
 const jsonConfig = require("../../ressources/json/config.json");
 
-const gameData = async (gameId) => {
+const gameData = async (uid) => {
     let gameSnapshot = await firestore
         .collection("games")
-        .where("gameId", "==", gameId);
+        .where("uid", "==", uid);
     let gameData = (await gameSnapshot.get()).docs[0];
     console.log(gameData);
     if (gameData) {
@@ -92,14 +92,11 @@ exports.getAGame = async (req, res) => {
            #swagger.security = [{
              "bearerAuth": []
        }]
-       #swagger.parameters['uid'] = {
-      in: 'path',
-      description: 'ID of game',
-      required: true,
-      type: 'string'
-    }
       */
-    const doc = await docExist("games", req.params.uid);
+    const uid = req.body.uid;
+    console.log(uid);
+    const doc = await docExist("games", uid);
+    
     try {
         if (!doc) {
             return res.status(404).send({ error: "Game not found." });
