@@ -24,7 +24,6 @@ exports.addGame = async (req, res) => {
       }] 
         */
     const {
-        gameId,
         gameName,
         publisher,
         players,
@@ -38,7 +37,6 @@ exports.addGame = async (req, res) => {
     firestore
         .collection("games")
         .add({
-            gameId: gameId,
             gameName: gameName,
             publisher: publisher,
             players: players,
@@ -94,14 +92,14 @@ exports.getAGame = async (req, res) => {
            #swagger.security = [{
              "bearerAuth": []
        }]
-       #swagger.parameters['gameId'] = {
+       #swagger.parameters['uid'] = {
       in: 'path',
       description: 'ID of game',
       required: true,
       type: 'string'
     }
       */
-    const doc = await docExist("games", req.params.gameId);
+    const doc = await docExist("games", req.params.uid);
     try {
         if (!doc) {
             return res.status(404).send({ error: "Game not found." });
@@ -121,16 +119,16 @@ exports.deleteGame = async (req, res) => {
         }] 
        */
 
-    const gameId = req.body.gameId;
+    const uid = req.body.uid;
 
     // Vérif input name
-    if (!gameId) {
+    if (!uid) {
         return res.status(400).send({ error: "Invalid data." });
     }
 
     // Vérifie si le jeu existe bdd
 
-    let gameInformation = await gameData(gameId);
+    let gameInformation = await gameData(uid);
     if (!gameInformation) {
         return res.status(403).json({ error: "Forbidden." });
     }

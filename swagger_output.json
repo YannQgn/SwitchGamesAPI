@@ -237,9 +237,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "gameId": {
-                  "example": "any"
-                },
                 "gameName": {
                   "example": "any"
                 },
@@ -379,7 +376,7 @@
             "type": "string"
           },
           {
-            "name": "gameId",
+            "name": "uid",
             "in": "path",
             "description": "ID of game",
             "required": true,
@@ -395,6 +392,9 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "security": [
@@ -423,7 +423,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "gameId": {
+                "uid": {
                   "example": "any"
                 }
               }
