@@ -5,7 +5,7 @@ const apiEndpointsFiles = ['src/api-endpoints.js']
 
 const doc = {
     info: {
-        version: "3.0.0",
+        version: "4.0.0",
         title: "SwitchGames API Documentation",
         description: "SwitchGames API Documentation",
         termsOfService: "http://swagger.io/terms/",
