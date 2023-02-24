@@ -113,8 +113,8 @@ exports.deleteGame = async (req, res) => {
     // Vérifie si le jeu existe bdd
     try {
         let gameExists = await gameAlreadyExists(gameId);
-        if (gameExists == true) {
-            return res.status(403).json({ "error": "Game not found !" });
+        if (gameExists == false) {
+            return res.status(403).json({ "error": "Forbidden." });
         }
     } catch (error) {
         console.error(error);
@@ -134,6 +134,7 @@ exports.deleteGame = async (req, res) => {
 const gameAlreadyExists = async (gameId) => {
     let gameSnapshot = await firestore.collection("games").where("gameId", "==", gameId);
     let gameData = (await gameSnapshot.get()).docs[0];
+    console.log(gameData);
     if (gameData) {
         return true;
     } else {
