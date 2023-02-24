@@ -22,7 +22,7 @@ const doc = {
             // dev
             // url: "localhost:8080/switchgames/api/v1"
             // prod
-            host: "switch-games-api.onrender.com/switchgames/api/v1"
+            url: "switch-games-api.onrender.com/switchgames/api/v1"
         }
     ],
     // dev

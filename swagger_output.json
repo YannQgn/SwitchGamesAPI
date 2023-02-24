@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "3.0.0",
+    "version": "4.0.0",
     "title": "SwitchGames API Documentation",
     "description": "SwitchGames API Documentation",
     "termsOfService": "http://swagger.io/terms/",
@@ -13,13 +13,13 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "localhost:8080/switchgames/api/v1",
+  "host": "switch-games-api.onrender.com",
   "servers": [
     {
-      "url": "http://localhost:8080/switchgames/api/v1/"
+      "host": "switch-games-api.onrender.com/switchgames/api/v1"
     }
   ],
-  "basePath": "/",
+  "basePath": "/switchgames/api/v1",
   "tags": [
     {
       "name": "User",
@@ -362,7 +362,7 @@
         ]
       }
     },
-    "/get-a-game": {
+    "/get-a-game/{id}": {
       "get": {
         "tags": [
           "Games"
@@ -370,6 +370,13 @@
         "summary": "Service to get a game",
         "description": "Service to get a game",
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Game id"
+          },
           {
             "name": "authorization",
             "in": "header",

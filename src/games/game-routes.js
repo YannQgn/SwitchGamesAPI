@@ -9,7 +9,7 @@ module.exports = app => {
     router.put("/update-game", authenticateToken, game.updateGame);
 
     router.get("/get-all-games", authenticateToken, game.getAllGames);
-    router.get("/get-a-game", authenticateToken, game.getAGame);
+    router.get("/get-a-game/:id", authenticateToken, game.getAGame);
 
     router.delete("/delete-game", authenticateToken, game.deleteGame);
 

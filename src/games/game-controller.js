@@ -89,14 +89,15 @@ exports.getAGame = async (req, res) => {
     /* #swagger.tags = ['Games']
        #swagger.description = 'Service to get a game';
        #swagger.summary = "Service to get a game";
+       #swagger.parameters['id'] = { description: 'Game id' }
            #swagger.security = [{
              "bearerAuth": []
        }]
       */
-    const uid = req.body.uid;
+    const uid = req.params.id;
     console.log(uid);
     const doc = await docExist("games", uid);
-    
+
     try {
         if (!doc) {
             return res.status(404).send({ error: "Game not found." });
