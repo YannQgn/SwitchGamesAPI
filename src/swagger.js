@@ -19,7 +19,10 @@ const doc = {
     },
     servers: [
         {
-            url: "http://localhost:8080/switchgames/api/v1/"
+            // dev
+            // url: "localhost:8080/switchgames/api/v1"
+            // prod
+            host: "switch-games-api.onrender.com/switchgames/api/v1"
         }
     ],
     // dev
