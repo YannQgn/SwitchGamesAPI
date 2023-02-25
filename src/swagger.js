@@ -3,6 +3,8 @@ const swaggerAutogen = require('swagger-autogen')()
 const outputFile = './swagger_output.json'
 const apiEndpointsFiles = ['src/api-endpoints.js']
 
+const { gameScheme, updateGameScheme } = require('./schemes/game')
+
 const doc = {
     info: {
         version: "4.0.0",
@@ -20,17 +22,17 @@ const doc = {
     servers: [
         {
             // dev
-            // url: "localhost:8080/switchgames/api/v1"
+            url: "localhost:8080/switchgames/api/v1"
             // prod
-            url: "https://www.switch-games-api.onrender.com/switchgames/api/v1"
+            // url: "https://www.switch-games-api.onrender.com/switchgames/api/v1"
         }
     ],
     // dev
-    // host: "localhost:8080/switchgames/api/v1",
-    // basePath: "/",
+    host: "localhost:8080/switchgames/api/v1",
+    basePath: "/",
     // prod
-    host: "switch-games-api.onrender.com",
-    basePath: "/switchgames/api/v1",
+    // host: "switch-games-api.onrender.com",
+    // basePath: "/switchgames/api/v1",
     schemes: ["http", "https"],
     consumes: ['application/json'],
     produces: ['application/json'],
@@ -43,39 +45,18 @@ const doc = {
             in: 'header'
         }
     },
-    tags: [
-        {
-            "name": "User",
-            "description": "Endpoints"
-        }
-    ],
-    definitions: {
-        User: {
-            name: "Jhon Doe",
-            age: 29,
-            parents: {
-                father: "Simon Doe",
-                mother: "Marie Doe"
-            },
-            diplomas: [
-                {
-                    school: "XYZ University",
-                    year: 2020,
-                    completed: true,
-                    internship: {
-                        hours: 290,
-                        location: "XYZ Company"
-                    }
-                }
-            ]
-        },
-        AddUser: {
-            $name: "Jhon Doe",
-            $age: 29,
-            about: ""
-        }
+    // tags: [
+    //     {
+    //         "name": "User",
+    //         "description": "Endpoints"
+    //     }
+    // ],
+    "@definitions": {
+        AddGame: gameScheme,
+        UpdateGame: updateGameScheme,
     }
 }
+
 
 swaggerAutogen(outputFile, apiEndpointsFiles, doc).then(() => {
     // -- For auto generating swagger_output.json file

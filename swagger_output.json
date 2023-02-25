@@ -13,19 +13,13 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "switch-games-api.onrender.com",
+  "host": "localhost:8080/switchgames/api/v1",
   "servers": [
     {
-      "url": "https://www.switch-games-api.onrender.com/switchgames/api/v1"
+      "url": "localhost:8080/switchgames/api/v1"
     }
   ],
-  "basePath": "/switchgames/api/v1",
-  "tags": [
-    {
-      "name": "User",
-      "description": "Endpoints"
-    }
-  ],
+  "basePath": "/",
   "schemes": [
     "http",
     "https"
@@ -46,67 +40,6 @@
     "application/json"
   ],
   "paths": {
-    "/users/{id}": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "API endpoint to get user by id",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "User id"
-          },
-          {
-            "name": "filters",
-            "in": "query",
-            "description": "definition of filters",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Model of user response",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/users": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "description": "API Endpoint to add new user",
-        "parameters": [
-          {
-            "name": "newUser",
-            "in": "body",
-            "description": "User informations",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AddUser"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "User registered with success !!!"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/register": {
       "post": {
         "tags": [
@@ -233,48 +166,74 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
+            "description": "A Game Object will be created.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "gameName": {
-                  "example": "any"
-                },
-                "publisher": {
-                  "example": "any"
-                },
-                "players": {
-                  "example": "any"
-                },
-                "languages": {
-                  "example": "any"
-                },
-                "categories": {
-                  "example": "any"
-                },
-                "releaseDate": {
-                  "example": "any"
-                },
-                "ageRating": {
-                  "example": "any"
-                },
-                "compatibleControllers": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/AddGame"
             }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "200": {
+            "description": "Game added successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Game added successfully"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or insufficient data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Invalid or insufficient data"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Invalid token.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "You do not have the rights."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Internal server error"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         },
         "security": [
@@ -298,30 +257,89 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "obj",
             "in": "body",
+            "description": "Object : Game, ID is required.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "uid": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/UpdateGame"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Game updated successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Game updated successfully"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or insufficient data",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Invalid or insufficient data"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Invalid token.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "You do not have the rights."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Game not found.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Game not found."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Internal server error."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
           }
         },
         "security": [
@@ -424,7 +442,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "uid": {
+                "id": {
                   "example": "any"
                 }
               }
@@ -457,84 +475,140 @@
     }
   },
   "definitions": {
-    "User": {
+    "AddGame": {
       "type": "object",
       "properties": {
-        "name": {
+        "id": {
           "type": "string",
-          "example": "Jhon Doe"
+          "default": "skOjftUK4qzvbdb6ivAL",
+          "description": "UID of the game"
         },
-        "age": {
-          "type": "number",
-          "example": 29
-        },
-        "parents": {
-          "type": "object",
-          "properties": {
-            "father": {
-              "type": "string",
-              "example": "Simon Doe"
-            },
-            "mother": {
-              "type": "string",
-              "example": "Marie Doe"
-            }
-          }
-        },
-        "diplomas": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "school": {
-                "type": "string",
-                "example": "XYZ University"
-              },
-              "year": {
-                "type": "number",
-                "example": 2020
-              },
-              "completed": {
-                "type": "boolean",
-                "example": true
-              },
-              "internship": {
-                "type": "object",
-                "properties": {
-                  "hours": {
-                    "type": "number",
-                    "example": 290
-                  },
-                  "location": {
-                    "type": "string",
-                    "example": "XYZ Company"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "AddUser": {
-      "type": "object",
-      "properties": {
-        "name": {
+        "gameName": {
           "type": "string",
-          "example": "Jhon Doe"
+          "description": "Game name.",
+          "default": "The Legend of Zelda : Breath of The Wild",
+          "maxLength": 80
         },
-        "age": {
-          "type": "number",
-          "example": 29
-        },
-        "about": {
+        "publisher": {
           "type": "string",
-          "example": ""
+          "description": "Game publisher.",
+          "default": "Nintendo",
+          "maxLength": 50
+        },
+        "players": {
+          "type": "string",
+          "description": "How many players can play ?",
+          "default": "Single System (1)",
+          "maxLength": 30
+        },
+        "languages": {
+          "type": "string",
+          "description": "In which language the game can be played ?",
+          "default": "German, English, Spanish, French, Italian, Japanese",
+          "maxLength": 200
+        },
+        "categories": {
+          "type": "string",
+          "description": "What categories the game have ?",
+          "default": "Action, Adventure",
+          "maxLength": 200
+        },
+        "releaseDate": {
+          "type": "string",
+          "description": "Release date of the game.",
+          "default": "08/12/2017",
+          "maxLength": 20
+        },
+        "ageRating": {
+          "type": "string",
+          "description": "PEGI n ?",
+          "default": "PEGI 12",
+          "maxLength": 15
+        },
+        "compatibleControllers": {
+          "type": "string",
+          "description": "Which type of controller you can play the game with.",
+          "default": "Nintendo Switch Pro Controller",
+          "maxLength": 75
         }
       },
       "required": [
-        "name",
-        "age"
+        "gameName",
+        "publisher",
+        "players",
+        "languages",
+        "categories",
+        "releaseDate",
+        "ageRating",
+        "compatibleControllers"
+      ]
+    },
+    "UpdateGame": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "default": "skOjftUK4qzvbdb6ivAL",
+          "description": "UID of the game"
+        },
+        "gameName": {
+          "type": "string",
+          "description": "Game name.",
+          "default": "The Legend of Zelda : Breath of The Wild",
+          "maxLength": 80
+        },
+        "publisher": {
+          "type": "string",
+          "description": "Game publisher.",
+          "default": "Nintendo",
+          "maxLength": 50
+        },
+        "players": {
+          "type": "string",
+          "description": "How many players can play ?",
+          "default": "Single System (1)",
+          "maxLength": 30
+        },
+        "languages": {
+          "type": "string",
+          "description": "In which language the game can be played ?",
+          "default": "German, English, Spanish, French, Italian, Japanese",
+          "maxLength": 200
+        },
+        "categories": {
+          "type": "string",
+          "description": "What categories the game have ?",
+          "default": "Action, Adventure",
+          "maxLength": 200
+        },
+        "releaseDate": {
+          "type": "string",
+          "description": "Release date of the game.",
+          "default": "08/12/2017",
+          "maxLength": 20
+        },
+        "ageRating": {
+          "type": "string",
+          "description": "PEGI n ?",
+          "default": "PEGI 12",
+          "maxLength": 15
+        },
+        "compatibleControllers": {
+          "type": "string",
+          "description": "Which type of controller you can play the game with.",
+          "default": "Nintendo Switch Pro Controller",
+          "maxLength": 75
+        }
+      },
+      "required": [
+        "gameName",
+        "publisher",
+        "players",
+        "languages",
+        "categories",
+        "releaseDate",
+        "ageRating",
+        "compatibleControllers"
       ]
     }
   }
