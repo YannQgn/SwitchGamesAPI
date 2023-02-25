@@ -7,7 +7,7 @@ const { gameScheme, updateGameScheme } = require('./schemes/game')
 
 const doc = {
     info: {
-        version: "4.0.1",
+        version: "4.0.2",
         title: "SwitchGames API Documentation",
         description: "SwitchGames API Documentation",
         termsOfService: "http://swagger.io/terms/",
