@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "4.0.0",
+    "version": "4.0.1",
     "title": "SwitchGames API Documentation",
     "description": "SwitchGames API Documentation",
     "termsOfService": "http://swagger.io/terms/",
@@ -13,13 +13,13 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "localhost:8080/switchgames/api/v1",
+  "host": "switch-games-api.onrender.com",
   "servers": [
     {
-      "url": "localhost:8080/switchgames/api/v1"
+      "url": "https://www.switch-games-api.onrender.com/switchgames/api/v1"
     }
   ],
-  "basePath": "/",
+  "basePath": "/switchgames/api/v1",
   "schemes": [
     "http",
     "https"

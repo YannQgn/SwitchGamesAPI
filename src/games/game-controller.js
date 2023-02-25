@@ -60,7 +60,7 @@ exports.addGame = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        return res.status(500).send({ message: "ERROR_MESSAGES.SERVER_ERROR" });
+        return res.status(500).send({ message: "Server error." });
     }
 };
 
