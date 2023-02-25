@@ -1,7 +1,3 @@
-
-const Ajv = require("ajv");
-const ajv = new Ajv();
-
 const firestore = require("../config/firebase-config");
 
 const gameData = async (id) => {
